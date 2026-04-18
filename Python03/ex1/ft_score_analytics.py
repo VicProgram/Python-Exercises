@@ -1,6 +1,6 @@
 # #! /usr/bin/env python3
 
-# import sys
+import sys
 
 
 # def ft_score_analytics(scorelist: list) -> None:
@@ -38,16 +38,37 @@
 #     if scorelist:
 #         ft_score_analytics(scorelist)
 
-def ft_score_analytics(scorelist: list) -> None:
-    
+
+def ft_score_analytics() -> None:
+
     if len(sys.argv) == 1:
-            print(
-                "No scores provided. Usage: python3 "
-                "ft_score_analytics.py < score1> <score2> ..."
-            )
+        print(
+            "No scores provided. Usage: python3 "
+            "ft_score_analytics.py < score1> <score2> ..."
+        )
+        return
     try:
+        score_list = []
         for arg in sys.argv[1:]:
-            scores += arg
-        
+            num = int(arg)
+            score_list.append(num)
+    except ValueError:
+        print(f"Invalid parameter '{arg}'")
+
+    total_players = len(score_list)
+    total_score = sum(score_list)
+    average = total_score / total_players
+    high_score = max(score_list)
+    low_score = min(score_list)
+
+    print("=== Player Score Analytics ===")
+    print("Total players: ", total_players)
+    print(f"Total score: {total_score}")
+    print(f"Average score:{average:.1f}")
+    print(f"High score: {high_score}")
+    print(f"Low score: {low_score}")
+    print(f"Score range: {high_score - low_score}")
+
+
 if __name__ == "__main__":
     ft_score_analytics()
