@@ -2,8 +2,6 @@ import sys
 from typing import IO
 
 
-# python3 ft_ancient_text.py /etc/shadow
-
 def display_file(file: str) -> None:
     try:
         f: IO[str] = open(file, "r")

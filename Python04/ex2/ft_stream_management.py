@@ -18,7 +18,7 @@ def display_file(file: str) -> str:
         print(f"File '{file}' closed.\n")
         return content
     except (FileNotFoundError, PermissionError) as e:
-        print(f"Error opening file '{file}': {e}")
+        sys.stderr.write(f"[STDERR] Error opening file '{file}': {e}\n")
         return ""
 
 
@@ -39,7 +39,7 @@ def transform_data(content: str, filename: str) -> None:
 def save_data(content: str, filename: str) -> None:
 
     if filename == "":
-        print("Not saving data.")
+        sys.stdout.write("Not saving data.")
         return
 
     print(f"Saving data to '{filename}'")
@@ -50,15 +50,17 @@ def save_data(content: str, filename: str) -> None:
             if line:
                 f.write(line + "#\n")
         f.close()
-        print(f"Data saved in file '{filename}'.")
-    except FileNotFoundError as e:
-        print(f"Error opening file '{filename}': {e}")
-        print("Data not saved")
+        sys.stdout.write(f"Data saved in file '{filename}'.")
+        sys.stdout.flush()
+    except (FileNotFoundError, PermissionError) as e:
+        sys.stderr.write(f"[STDERR] Error opening file '{filename}': {e}\n")
+        sys.stderr.write("Data not saved")
+        sys.stderr.flush()
 
 
 if __name__ == "__main__":
 
-    print("=== Cyber Archives Recovery & Preservation ===")
+    print("=== Cyber Archives Recovery & Preservation  ===")
 
     if len(sys.argv) != 2:
         print(f"Usage: {sys.argv[0]} <file>")
@@ -72,7 +74,8 @@ if __name__ == "__main__":
     if content is not None:
 
         transform_data(content, file_name)
-
-        filename = input("Enter new file name (or empty): ")
-
-        save_data(content, filename)
+        sys.stdout.write("Enter new file name (or empty): ")
+        sys.stdout.flush()
+        filename = sys.stdin.readline().strip()
+        if filename is not None:
+            save_data(content, filename)
