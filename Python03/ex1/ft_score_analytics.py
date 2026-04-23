@@ -9,8 +9,8 @@ def ft_score_analytics() -> None:
     if len(sys.argv) == 1:
         print(nsp)
         return
+    score_list = []
     for arg in sys.argv[1:]:
-        score_list = []
         try:
             num = int(arg)
             score_list.append(num)
