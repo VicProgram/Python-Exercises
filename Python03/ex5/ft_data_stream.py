@@ -29,8 +29,9 @@ def consume_event(
 ]:
     while event_list:
         rm = random.randint(0, len(event_list) - 1)
+        removed = event_list[rm]
         event_list = event_list[:rm] + event_list[rm + 1:]
-        yield event, event_list
+        yield removed, event_list
 
 
 if __name__ == "__main__":
@@ -46,5 +47,5 @@ if __name__ == "__main__":
     print("Built list of 10 events:", event_list)
 
     for event, remaining in consume_event(event_list):
-        print("Got event from list:", event)
+        print("Got event from list:", removed)
         print("Remains in list:", remaining)
