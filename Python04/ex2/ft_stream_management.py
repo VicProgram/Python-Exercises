@@ -56,6 +56,7 @@ def save_data(content: str, filename: str) -> None:
         sys.stderr.write(f"[STDERR] Error opening file '{filename}': {e}\n")
         sys.stderr.write("Data not saved")
         sys.stderr.flush()
+        return
 
 
 if __name__ == "__main__":
@@ -71,7 +72,7 @@ if __name__ == "__main__":
 
     content = display_file(file_name)
 
-    if content is not None:
+    if content:
 
         transform_data(content, file_name)
         sys.stdout.write("Enter new file name (or empty): ")
@@ -79,3 +80,5 @@ if __name__ == "__main__":
         filename = sys.stdin.readline().strip()
         if filename is not None:
             save_data(content, filename)
+    else:
+        sys.exit(1)
