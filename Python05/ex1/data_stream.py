@@ -18,7 +18,6 @@ class DataProcessor(ABC):
             raise IndexError("No data to process")
         item = self.storage.pop(0)
         rank = self.count
-        self.count += 1
         return (rank, item)
 
 
@@ -38,9 +37,10 @@ class NumericProcessor(DataProcessor):
         if isinstance(data, list):
             for item in data:
                 self.storage.append(str(item))
+                self.count += 1
         else:
             self.storage.append(str(data))
-
+        self.count += 1
 
 class TextProcessor(DataProcessor):
 
@@ -60,7 +60,8 @@ class TextProcessor(DataProcessor):
         if isinstance(data, list):
             for x in data:
                 self.storage.append(x)
-
+                self.count += 1
+        self.count += 1
 
 class LogProcessor(DataProcessor):
 
@@ -74,13 +75,13 @@ class LogProcessor(DataProcessor):
     def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             raise ValueError("Improper log data")
-
+            
         items = data if isinstance(data, list) else [data]
         for item in items:
             item_entry = ": ".join(str(v) for v in item.values())
             self.storage.append(item_entry)
-
-
+            self.count += 1
+        
 class DataStream:
 
     def __init__(self) -> None:
