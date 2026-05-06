@@ -7,12 +7,19 @@ from typing import Any
 
 def battle(opponents: list[tuple[Any, Any]]) -> None:
     fighters = []
+    display_list = []
 
     for factory, strategy in opponents:
         creature_instance = factory.create_base()
         fighters.append((creature_instance, strategy))
 
-    print("*** Tournament ***")
+        c_name = creature_instance.name
+        s_name = strategy.__class__.__name__.replace("Strategy", "")
+        display_list.append(f"({c_name}+{s_name})")
+
+    print(f"[ {', '.join(display_list)} ]")
+
+    print("*** Tournament ***\n")
     print(f"{len(fighters)} opponents involved")
 
     n = len(fighters)
@@ -22,7 +29,7 @@ def battle(opponents: list[tuple[Any, Any]]) -> None:
             c1, s1 = fighters[i]
             c2, s2 = fighters[j]
 
-            print("* Battle *")
+            print("\n* Battle *")
             print(c1.describe())
             print("vs.")
             print(c2.describe())
