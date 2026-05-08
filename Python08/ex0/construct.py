@@ -39,7 +39,7 @@ def check_virtual_env() -> None:
             "\nTo enter the construct, run:"
             "\npython -m venv matrix_env"
             "\nsource matrix_env/bin/activate # On Unix\n"
-            "matrix_env\Scripts\activate # On Windows"
+            "matrix_env\\Scripts\activate # On Windows"
         )
         print("\nThen run this program again.")
         return

@@ -51,10 +51,9 @@ def main() -> None:
         print("To install with Poetry: poetry install")
 
 
+# poetry env remove --all
+# poetry cache clear --all pypi
+
 if __name__ == "__main__":
 
     main()
-
-
-# poetry env remove --all
-# poetry cache clear --all pypi
