@@ -1,0 +1,5 @@
+MATRIX_MODE=production
+DATABASE_URL=postgres://oracle:neo_is_the_one@localhost:5432/mainframe
+API_KEY=secret123
+LOG_LEVEL=INFO
+ZION_ENDPOINT=https://zion.resistance.network/v1/uplink
