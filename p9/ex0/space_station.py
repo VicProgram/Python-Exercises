@@ -18,7 +18,7 @@ def main() -> None:
     print("Space Station Data Validation")
     print("========================================")
 
-    good_station = SpaceStation(
+    stat1 = SpaceStation(
         station_id="ISS001",
         name="International Space Station",
         crew_size=6,
@@ -27,28 +27,32 @@ def main() -> None:
         last_maintenance="2026-05-08T15:30:00",  # type: ignore
     )
 
-    print("Valid good_station created:")
-    print(f"ID: {good_station.station_id}")
-    print(f"Name: {good_station.name}")
-    print(f"Crew: {good_station.crew_size} people")
-    print(f"Power: {good_station.power_level}%")
-    print(f"Oxygen: {good_station.oxygen_level}%")
+    print("Valid good station created:")
+    print(f"ID: {stat1.station_id}")
+    print(f"Name: {stat1.name}")
+    print(f"Crew: {stat1.crew_size} people")
+    print(f"Power: {stat1.power_level}%")
+    print(f"Oxygen: {stat1.oxygen_level}%")
     print(
-        "Status: "
-        f"{'Operational'
-            if good_station.is_operational else 'Non-operational'}"
-        )
+        f"Status: "
+        f"{'Operational' if stat1.is_operational else 'Non-operational'}"
+    )
 
     print("========================================")
 
+    print("NOT Valid good station created:")
     try:
-        bad_station = SpaceStation(
+        stat2 = SpaceStation(
             station_id="ISS999",
             name="Broken Station",
             crew_size=99,
             power_level=50.0,
             oxygen_level=50.0,
             last_maintenance="2026-05-08T15:30:00"  # type: ignore
+        )
+        print(
+            f"Status: "
+            f"{'Operational' if stat2.is_operational else 'Non-operational'}"
         )
 
     except ValidationError as e:
