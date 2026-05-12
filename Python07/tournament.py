@@ -12,7 +12,6 @@ def battle(opponents: list[tuple[Any, Any]]) -> None:
     for factory, strategy in opponents:
         creature_instance = factory.create_base()
         fighters.append((creature_instance, strategy))
-
         c_name = creature_instance.name
         s_name = strategy.__class__.__name__.replace("Strategy", "")
         display_list.append(f"({c_name}+{s_name})")
